@@ -3,6 +3,9 @@
     $pageTitle = 'Login';
     include('includes/header.php'); 
 
+    if(isset($_SESSION['auth'])){
+        redirect('index.php', 'You are already logged in.', 'info');
+    }
 ?>
 
 <section class="vh-100" style="background-color: #fff;">
@@ -20,7 +23,7 @@
 
                                 <?= alertMessage(); ?>
                                 <form action="login-code.php" method="post">
-                                    <div class="d-flex align-items-center mb-3 pb-1">
+                                    <div class="d-flex align-items-center mb-2 pb-1">
                                         <img src="assets/image/logo-b.png" alt="" style="width: 50px;">
                                         <span class="h2 fw-bold mb-0"> Estrella Apartment</span>
                                     </div>
@@ -35,15 +38,9 @@
                                         <input type="password" name="password" class="form-control"/>
                                     </div>
 
-                                    <div class="pt-1 mb-4">
-                                        <a class="small text-muted" href="#!">Forgot password?</a>
-                                    </div>
-                                    
-                                    
-
                                     <div class="d-flex justify-content-between">
-                                        <button class="btn btn-lg btn-warning" name="btnHome" type="button">Back</button>
-                                        <button class="btn btn-lg btn-primary" name="btnLogin" type="submit">Login</button>
+                                        <a class="small text-muted" href="#!">Forgot password?</a>
+                                        <button class="btn btn-m btn-primary" name="btnLogin" type="submit">Login</button>
                                     </div>
                                 </form>
 

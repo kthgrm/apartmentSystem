@@ -95,4 +95,10 @@
         
         return $result && $userResult;
     }
+
+    function logoutSession(){
+        unset($_SESSION['auth']);
+        unset($_SESSION['userType']);
+        unset($_SESSION['loggedInUser']);
+    }
 ?>

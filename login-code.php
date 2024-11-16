@@ -18,13 +18,13 @@
                 $_SESSION['userType'] = $row['type'];
                 $_SESSION['loggedInUser'] = [
                     'userID' => $row['id'], 
-                    'userName' => $row['userName']
+                    'userName' => $row['username']
                 ];
                 
                 if($row['type'] == 'admin'){
-                    header("location: admin/admin.php");
+                    header("location: admin/index.php");
                 }else{
-                    header("location: ./user/user.php");
+                    header("location: user/index.php");
                 }
             }else{
                 redirect("login.php", "Incorrect Username or Password.", 'error');
