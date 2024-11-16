@@ -52,12 +52,10 @@
                                             $query .= " WHERE requestStatus = 'declined'";
                                             break;
                                         default:
-                                            // Default sorting or no sorting
                                             $query .= " ORDER BY requestDate DESC";
                                             break;
                                     }
 
-                                    // Execute the query
                                     $mReq = mysqli_query($conn, $query);
 
                                     // Check for errors
