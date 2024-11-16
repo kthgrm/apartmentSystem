@@ -16,6 +16,11 @@
           <a class="nav-link" href="about.php">About Us</a>
         </li>
       </ul>
+      <ul class="navbar-nav mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="btn btn-primary" href="login.php">Login</a>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

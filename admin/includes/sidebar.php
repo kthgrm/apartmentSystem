@@ -1,6 +1,6 @@
 <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 " id="sidenav-main">
     <div class="sidenav-header">
-      <a class="navbar-brand m-0" href="admin.php">
+      <a class="navbar-brand m-0" href="index.php">
         <img src="assets/image/logo-b.png" class="navbar-brand-img h-100" alt="main_logo">
         <span class="ms-1 font-weight-bold">Estrella Apartment</span>
       </a>
@@ -59,7 +59,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'tables.html' ? 'active' : ''; ?>" href="../pages/tables.html">
+                <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'maintenance.php' ? 'active' : ''; ?>" href="maintenance.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-book text-dark text-lg"></i>
                     </div>

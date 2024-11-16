@@ -10,6 +10,8 @@
 
     <link rel="stylesheet" href="assets/css/bootstrap.min.css">
     <link rel="stylesheet" href="assets/css/styles.css">
+
+    <link rel="icon" href="assets/image/logo-w.png" type="image/png">
 </head>
 <body>
 
