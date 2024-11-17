@@ -75,37 +75,17 @@
         }
     }
 
-    $sortOption = isset($_GET['sort']) ? $_GET['sort'] : '';
-    $query = "SELECT * FROM maintenance";
+    if(isset($_POST['updateRequestStatus'])){
+        $status = validate($_POST['status']);
+        $requestID = validate($_POST['requestID']);
+        
+        $query = "UPDATE maintenance SET requestStatus = '$status' WHERE requestID = '$requestID'";
+        $result = mysqli_query($conn, $query);
 
-    // Modify the query based on the sorting option
-    switch ($sortOption) {
-        case 'Pending':
-            $query .= " WHERE status = 'pending'";
-            break;
-        case 'Approved':
-            $query .= " WHERE status = 'approved'";
-            break;
-        case 'Declined':
-            $query .= " WHERE status = 'declined'";
-            break;
-        default:
-            // Default sorting or no sorting
-            $query .= " ORDER BY request_date DESC";
-            break;
-    }
-
-    // Execute the query
-    $result = mysqli_query($conn, $query);
-
-    // Check for errors
-    if (!$result) {
-        die('Query Failed: ' . mysqli_error($conn));
-    }
-
-    // Display the sorted data
-    while ($row = mysqli_fetch_assoc($result)) {
-        // Output your data here, e.g.:
-        echo "<div>{$row['request_date']} - {$row['status']}</div>";
+        if($result){
+            redirect("maintenance-view.php?id=".$requestID, "Request updated successfully." , 'success');
+        }else{
+            redirect("maintenance-view.php?id=".$requestID, "Failed to update request.", 'error');
+        }
     }
 ?>

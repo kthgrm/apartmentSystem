@@ -17,17 +17,17 @@
                 $_SESSION['auth'] = true;
                 $_SESSION['userType'] = $row['type'];
                 $_SESSION['loggedInUser'] = [
-                    'userID' => $row['id'], 
-                    'userName' => $row['username']
+                    'userID' => $row['userID'], 
+                    'username' => $row['username']
                 ];
                 
                 if($row['type'] == 'admin'){
-                    header("location: admin/index.php");
+                    header('location: admin/index.php');
                 }else{
-                    header("location: user/index.php");
+                    header('location: user/index.php');
                 }
             }else{
-                redirect("login.php", "Incorrect Username or Password.", 'error');
+                redirect("login.php", "Invalid username or password. Please try again.", 'error');
             }
         }
     }

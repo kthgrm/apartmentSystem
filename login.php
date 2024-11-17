@@ -3,8 +3,12 @@
     $pageTitle = 'Login';
     include('includes/header.php'); 
 
-    if(isset($_SESSION['auth'])){
-        redirect('index.php', 'You are already logged in.', 'info');
+    if(isset($_SESSION['auth'])) {
+        if($_SESSION['userType'] == 'admin') {
+            redirect('admin/index.php', 'You are already logged in as admin.', 'info');
+        } else {
+            redirect('user/index.php', 'You are already logged in.', 'info');
+        }
     }
 ?>
 
@@ -40,7 +44,7 @@
 
                                     <div class="d-flex justify-content-between">
                                         <a class="small text-muted" href="#!">Forgot password?</a>
-                                        <button class="btn btn-m btn-primary" name="btnLogin" type="submit">Login</button>
+                                        <button class="btn btn-m mb-0 btn-primary btn-warning" name="btnLogin" type="submit">Login</button>
                                     </div>
                                 </form>
 
@@ -52,4 +56,6 @@
         </div>
     </div>
 </section>
+
+<?php include('includes/footer.php'); ?>
 

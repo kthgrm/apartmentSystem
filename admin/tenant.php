@@ -17,7 +17,7 @@
                 <?= alertMessage(); ?>
 
                     <div class="table-responsive">
-                        <table class="table table-sm table-bordered table-striped">
+                        <table id="myTable" class="table table-bordered table-striped">
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -45,8 +45,8 @@
                                                 <td><?= $tenantItem['email']; ?></td>
                                                 <td><?= $tenantItem['unitID']; ?></td>
                                                 <td>
-                                                    <a href="tenant-edit.php?id=<?= $tenantItem['tenantID']; ?>" class="btn btn-success btn-sm">Edit</a>
-                                                    <a href="tenant-delete.php?id=<?= $tenantItem['tenantID']; ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
+                                                    <a href="tenant-edit.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-success btn-sm">Edit</a>
+                                                    <a href="tenant-delete.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
                                                 </td>
                                             </tr>
                                 <?php

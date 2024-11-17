@@ -69,7 +69,7 @@
         </ul>
     </div>
     <div class="sidenav-footer mx-4 ">
-        <a class="btn btn-primary mt-3 w-100 d-flex align-items-center justify-content-center" href="logout.php">
+        <a class="btn btn-primary mt-3 w-100 d-flex align-items-center justify-content-center" href="logout.php" onclick="return confirm('Are you sure you want to logout?')">
             <i class="fa fa-sign-out me-2"></i> Logout
         </a>
     </div>

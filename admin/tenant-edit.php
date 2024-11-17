@@ -91,7 +91,7 @@
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3 text-end">
-                                            <button type="submit" class="btn btn-primary" name="updateTenant">Update Tenant</button>
+                                            <button type="submit" class="btn btn-primary" name="updateTenant" onclick="return confirm('Confirm changes?')">Update Tenant</button>
                                         </div>
                                     </div>
                                 </div>
@@ -107,4 +107,4 @@
         </div>
     </div>
 
-<?php include('../includes/footer.php') ?>
+<?php include('includes/footer.php') ?>
