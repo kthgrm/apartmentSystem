@@ -88,4 +88,18 @@
             redirect("maintenance-view.php?id=".$requestID, "Failed to update request.", 'error');
         }
     }
+
+    if(isset($_POST['updateComplaintStatus'])){
+        $status = validate($_POST['status']);
+        $complaintID = validate($_POST['complaintID']);
+        
+        $query = "UPDATE complaint SET complaintStatus = '$status' WHERE complaintID = '$complaintID'";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            redirect("complaint-view.php?id=".$complaintID, "Request updated successfully." , 'success');
+        }else{
+            redirect("complaint-view.php?id=".$complaintID, "Failed to update request.", 'error');
+        }
+    }
 ?>

@@ -96,7 +96,87 @@
         return $result;
     }
 
-    function getByIdJoinTenant($tableName, $id){
+    function getProfile($tableName, $id){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table WHERE tenantID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+
+    function getByIdMaintenance($tenantID){
+        global $conn;
+        $tenant = validate($tenantID);
+        $query = "SELECT * FROM maintenance JOIN tenant ON maintenance.tenantID = tenant.tenantID WHERE maintenance.tenantID = '$tenant'";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
+    function getByIdComplaint($tenantID){
+        global $conn;
+        $tenant = validate($tenantID);
+        $query = "SELECT * FROM complaint JOIN tenant ON complaint.tenantID = tenant.tenantID WHERE complaint.tenantID = '$tenant'";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
+    function getByIdComplaintJoinTenant($tableName, $id){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID WHERE complaintID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+
+    function getByIdMaintenanceJoinTenant($tableName, $id){
         global $conn;
         $table = validate($tableName);
         $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID WHERE requestID = '$id' LIMIT 1";

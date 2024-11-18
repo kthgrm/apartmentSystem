@@ -5,10 +5,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-3 col-lg-5">
+                        <div class="col-md-3 col-lg-7">
                             <h4 class="font-weight-bolder">Maintenance Request List</h4>
                         </div>
-                        <div class="col-md-9 col-lg-7">
+                        <div class="col-md-9 col-lg-5 text-end">
                             <form method="GET" action="">
                                 <div class="row">
                                     <div class="col-md-4 col-lg-4">
@@ -84,7 +84,7 @@
                                             <td><?= $mReqItem['requestStatus']; ?></td>
                                             <td>
                                                 <a href="maintenance-view.php?id=<?= $mReqItem['requestID']; ?>" class="btn mb-0 btn-info btn-sm">View</a>
-                                                <a href="maintenance-delete.php?id=<?= $mReqItem['requestID']; ?>" class="btn mb-0 btn-danger btn-sm">Delete</a>
+                                                <a href="maintenance-delete.php?id=<?= $mReqItem['requestID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this request?')">Delete</a>
                                             </td>
                                         </tr>
                                 <?php

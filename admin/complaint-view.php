@@ -5,8 +5,8 @@
             <div class="card">
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="font-weight-bolder">Request Details</h4>
-                        <a href="maintenance.php" class="btn btn-primary mb-0 float-end">
+                        <h4 class="font-weight-bolder">Complaint Details</h4>
+                        <a href="complaint.php" class="btn btn-primary mb-0 float-end">
                             <i class="fa fa-angle-left"></i>
                             Back
                         </a>
@@ -22,36 +22,40 @@
                             return false;
                         }
 
-                        $maintenance = getByIdMaintenanceJoinTenant('maintenance',$paramResult);
-                        if($maintenance){
-                            if($maintenance['status'] == 200){
+                        $complaint = getByIdComplaintJoinTenant('complaint',$paramResult);
+                        if($complaint){
+                            if($complaint['status'] == 200){
                     ?>
                                 <div class="table-responsive">
                                     <table class="table table-sm table-bordered table-striped">
                                         <tbody>
                                             <tr>
-                                                <th style="width: 30%;">Maintenance ID</th>
-                                                <td><?= $maintenance['data']['requestID'] ?></td>
+                                                <th style="width: 30%;">Complaint ID</th>
+                                                <td><?= $complaint['data']['complaintID'] ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 30%;">Tenant</th>
-                                                <td><?= $maintenance['data']['fname'].' '.$maintenance['data']['lname'] ?></td>
+                                                <td><?= $complaint['data']['fname'].' '.$complaint['data']['lname'] ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 30%;">Unit</th>
-                                                <td><?= $maintenance['data']['unitID'] ?></td>
+                                                <td><?= $complaint['data']['unitID'] ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 30%;">Date</th>
-                                                <td><?= $maintenance['data']['requestDate'] ?></td>
+                                                <td><?= $complaint['data']['complaintDate'] ?></td>
+                                            </tr>
+                                            <tr>
+                                                <th style="width: 30%;">Subject</th>
+                                                <td><?= $complaint['data']['complaintSubject'] ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 30%;">Description</th>
-                                                <td><?= $maintenance['data']['requestDescription'] ?></td>
+                                                <td><?= $complaint['data']['complaintDescription'] ?></td>
                                             </tr>
                                             <tr>
                                                 <th style="width: 30%;">Status</th>
-                                                <td><?= $maintenance['data']['requestStatus'] ?></td>
+                                                <td><?= $complaint['data']['complaintStatus'] ?></td>
                                             </tr>
                                         </tbody>
                                     </table>    
@@ -59,18 +63,19 @@
                                 <div class="mt-3">
                                     <div class="card border card-body">
                                         <form action="adminCode.php" method="post">
-                                            <input type="hidden" name="requestID" value="<?= $maintenance['data']['requestID'];?>">
+                                            <input type="hidden" name="complaintID" value="<?= $complaint['data']['complaintID'];?>">
                                             <div class="row">
                                                 <label>Update Status</label>
                                                 <div class="col-md-4">
                                                     <select name="status" class="form-select">
-                                                        <option value="pending" <?= $maintenance['data']['requestStatus'] == 'pending' ? 'selected' : ''; ?>>Pending</option>
-                                                        <option value="completed" <?= $maintenance['data']['requestStatus'] == 'completed' ? 'selected' : ''; ?>>Completed</option>
-                                                        <option value="declined" <?= $maintenance['data']['requestStatus'] == 'declined' ? 'selected' : ''; ?>>Declined</option>
+                                                        <option value="pending" <?= $complaint['data']['complaintStatus'] == 'pending' ? 'selected' : ''; ?>>Pending</option>
+                                                        <option value="in progress" <?= $complaint['data']['complaintStatus'] == 'in progress' ? 'selected' : ''; ?>>In Progress</option>
+                                                        <option value="resolved" <?= $complaint['data']['complaintStatus'] == 'resolved' ? 'selected' : ''; ?>>Resolved</option>
+                                                        <option value="invalid" <?= $complaint['data']['complaintStatus'] == 'invalid' ? 'selected' : ''; ?>>Invalid</option>
                                                     </select>
                                                 </div>
                                                 <div class="col-md-8">
-                                                    <button type="submit" name="updateRequestStatus" class="btn btn-primary">Update</button>
+                                                    <button type="submit" name="updateComplaintStatus" class="btn btn-primary">Update</button>
                                                 </div>
                                             </div>
                                         </form>

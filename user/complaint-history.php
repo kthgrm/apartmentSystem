@@ -5,8 +5,8 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-bolder">
-                        Request History
-                        <a href="maintenance.php" class="btn btn-primary float-end">
+                        Complaint History
+                        <a href="complaint.php" class="btn btn-primary float-end">
                             <i class="fa fa-angle-left"></i>
                             Back
                         </a>
@@ -20,8 +20,9 @@
                         <table class="table table-sm table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Request ID</th>
+                                    <th>Complaint ID</th>
                                     <th>Date</th>
+                                    <th>Subject</th>
                                     <th>Description</th>
                                     <th>Status</th>
                                 </tr>
@@ -29,15 +30,16 @@
                             <tbody>
                                 <?php
                                     $userID = $_GET['id'];
-                                    $request = getByIdMaintenance($userID);
-                                    if (mysqli_num_rows($request) > 0) {
-                                        foreach($request as $requestItem){ 
+                                    $complaint = getByIdComplaint($userID);
+                                    if (mysqli_num_rows($complaint) > 0) {
+                                        foreach($complaint as $complaintItem){ 
                                 ?>
                                             <tr>
-                                                <td><?= $requestItem['requestID']; ?></td>
-                                                <td><?= $requestItem['requestDate']; ?></td>
-                                                <td><?= $requestItem['requestDescription']; ?></td>
-                                                <td><?= $requestItem['requestStatus']; ?></td>
+                                                <td><?= $complaintItem['complaintID']; ?></td>
+                                                <td><?= $complaintItem['complaintDate']; ?></td>
+                                                <td><?= $complaintItem['complaintSubject']; ?></td>
+                                                <td><?= $complaintItem['complaintDescription']; ?></td>
+                                                <td><?= $complaintItem['complaintStatus']; ?></td>
                                             </tr>
                                 <?php
                                         }

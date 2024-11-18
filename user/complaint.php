@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="font-weight-bolder">
-                        Maintenance Request
+                        Complaint Form
                         <?php
                             if (isset($_SESSION['loggedInUser']['userID'])) {
                                 $userID = $_SESSION['loggedInUser']['userID'];
@@ -21,7 +21,7 @@
                                 $_SESSION['unit'] = $user['unitID'];
                             }
                         ?>
-                        <a href="maintenance-history.php?id=<?php echo $userID; ?>" class="btn btn-danger float-end">
+                        <a href="complaint-history.php?id=<?php echo $userID; ?>" class="btn btn-danger float-end">
                             <i class="fa fa-history"></i>
                             History
                         </a>
@@ -44,19 +44,25 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label>Request Date</label>
-                                    <input type="text" name="reqDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" disabled>
+                                    <label>Date</label>
+                                    <input type="text" name="compDate" class="form-control" value="<?php echo date('Y-m-d'); ?>" disabled>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label>Request Description</label>
-                                    <textarea name="reqDesc" class="form-control" rows="10"></textarea>
+                                    <label>Subject</label>
+                                    <input type="text" name="compSubject" class="form-control" required>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="mb-3">
+                                    <label>Description of the Issue</label>
+                                    <textarea name="compDesc" class="form-control" rows="10" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="mb-3 text-end">
-                                    <button type="submit" class="btn btn-primary" name="btnReqMaintenance" onclick="return confirm('Are you sure you want to submit this maintenance request?')">Submit Request</button>
+                                    <button type="submit" class="btn btn-primary" name="btnComplain" onclick="return confirm('Are you sure you want to submit complain?')">Submit Complain</button>
                                 </div>
                             </div>
                         </div>
