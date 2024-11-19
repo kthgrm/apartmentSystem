@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'tables.html' ? 'active' : ''; ?>" href="../pages/tables.html">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['unit.php', 'unit-view.php', 'unit-edit.php']) ? 'active' : ''; ?>" href="unit.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-building text-dark text-lg"></i>
                     </div>
@@ -52,7 +52,7 @@
             <li class="nav-item">
                 <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'tables.html' ? 'active' : ''; ?>" href="../pages/tables.html">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-book text-dark text-lg"></i>
+                        <i class="fa fa-credit-card text-dark text-lg"></i>
                     </div>
                     <span class="nav-link-text ms-1">Payment</span>
                 </a>
@@ -61,7 +61,7 @@
             <li class="nav-item">
                 <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['maintenance.php', 'maintenance-view.php']) ? 'active' : ''; ?>" href="maintenance.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-book text-dark text-lg"></i>
+                        <i class="fa fa-wrench text-dark text-lg"></i>
                     </div>
                     <span class="nav-link-text ms-1">Maintenance Request</span>
                 </a>

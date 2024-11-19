@@ -10,14 +10,17 @@
                             if (isset($_SESSION['loggedInUser']['userID'])) {
                                 $userID = $_SESSION['loggedInUser']['userID'];
 
-                                $query = "SELECT fname, lname, unitID FROM user JOIN tenant ON user.userID = tenant.tenantID WHERE userID = ?";
+                                $query = "SELECT * FROM user JOIN tenant ON user.userID = tenant.tenantID WHERE userID = ?";
                                 $stmt = $conn->prepare($query);
                                 $stmt->bind_param("i", $userID);
                                 $stmt->execute();
                                 $result = $stmt->get_result();
                                 $user = $result->fetch_assoc();
 
-                                $name = $user['fname'].' '.$user['lname'];
+                                $name = $user['fname'].' '.$user['mname'].' '.$user['lname'];
+                                $contact = $user['contact'];
+                                $email = $user['email'];
+                                $unit = $user['unitID'];
                                 $_SESSION['unit'] = $user['unitID'];
                             }
                         ?>
@@ -28,8 +31,43 @@
                     </h4>
                 </div>
                 <div class="card-body">
-                    
-                    
+                    <div class="row">
+                        <div class="col-md-12 text-center mb-2">
+                            <img src="<?php echo '../'.$user['tenantImage']; ?>" alt="Profile Picture" class="img-fluid img-thumbnail" style="border-radius:50%;max-width:300px">
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col"></div>
+                        <div class="col-md-6">
+                            <h5 class="font-weight-bolder">Name</h5>
+                            <p><?php echo $name; ?></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col"></div>
+                        <div class="col-md-6">
+                            <h5 class="font-weight-bolder">Contact Number</h5>
+                            <p><?php echo $contact; ?></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col"></div>
+                        <div class="col-md-6">
+                            <h5 class="font-weight-bolder">Email</h5>
+                            <p><?php echo $email; ?></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col"></div>
+                        <div class="col-md-6">
+                            <h5 class="font-weight-bolder">Unit</h5>
+                            <p><?php echo $unit; ?></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
                 </div>
             </div>
         </div>

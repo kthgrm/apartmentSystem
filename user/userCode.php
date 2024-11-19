@@ -52,6 +52,12 @@
         $contact = validate($_POST['contact']);
         $email = validate($_POST['email']);
         
+        // Retrieve the current tenant data
+        $tenant = getByID('tenant', $id);
+        if($tenant['status'] != 200){
+            redirect("profile-edit.php", "User not found.", 'error');
+        }
+
         if($_FILES['tenantImage']['size'] > 0){
             $tenantImage = $_FILES['tenantImage']['name'];
 
@@ -74,6 +80,12 @@
         $result = mysqli_query($conn, $query);
         if($result){
             if($_FILES['tenantImage']['size'] > 0){
+                // Delete the old image
+                $oldImagePath = '../'.$tenant['data']['tenantImage'];
+                if(file_exists($oldImagePath)){
+                    unlink($oldImagePath);
+                }
+                
                 move_uploaded_file($_FILES['tenantImage']['tmp_name'], $path.$filename);
             }
             redirect("profile.php", "Profile updated successfully." , 'success');
