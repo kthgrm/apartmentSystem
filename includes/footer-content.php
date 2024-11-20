@@ -1,4 +1,4 @@
-<div class="py-3 bg-light fixed-bottom opacity-75">
+<div class="py-2 bg-light fixed-bottom opacity-75">
     <div class="container">
         <div class="row">
             <div class="col-md-6">
