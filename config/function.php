@@ -51,6 +51,14 @@
         return $result;
     }
 
+    function fetchUnitTenant($id){
+        global $conn;
+        $vID = validate($id);
+        $query = "SELECT * FROM tenant WHERE unitID = '$vID'";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
     function checkParamID($paramType){
         if(isset($_GET[$paramType])){
             if($_GET[$paramType] != ''){
@@ -180,6 +188,38 @@
         global $conn;
         $table = validate($tableName);
         $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID WHERE requestID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+
+    function getByIdUnit($tableName, $id){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table WHERE unitID = '$id' LIMIT 1";
         $result = mysqli_query($conn, $query);
 
         if($result){

@@ -71,6 +71,7 @@
         $unit = validate($_POST['unit']);
         $username = validate($_POST['username']);
         $password = validate($_POST['password']);
+        $prevUnit = validate($_POST['prevUnit']);
 
         $tenantID = validate($_POST['tenantID']);
         
@@ -79,7 +80,7 @@
             redirect("tenant-edit.php?id=".$tenantID, "Tenant not found.", 'error');
         }
 
-
+        
         if(empty($fname) || empty($lname) || empty($contact) || empty($email) || empty($unit) || empty($username) || empty($password)){
             redirect("tenant-edit.php?id=$id", "Please fill all the input fields.", 'error');
         }else{
@@ -111,6 +112,19 @@
                 $query2 = "UPDATE tenant SET fname = '$fname', mname = '$mname', lname = '$lname', contact = '$contact', email = '$email', unitID = '$unit', tenantImage = '$finalImage' WHERE tenantID = '$tenantID'";
                 $result2 = mysqli_query($conn, $query2);
                 if($result2){
+                    $query3 = "SELECT COUNT(*) AS tenantCount FROM tenant WHERE unitID = '$prevUnit'";
+                    $result3 = mysqli_query($conn, $query3);
+                    if ($result3) {
+                        $row = mysqli_fetch_array($result3, MYSQLI_ASSOC);
+                        if ($row['tenantCount'] == 0) {
+                            $query4 = "UPDATE unit SET status = 'vacant' WHERE unitID = '$prevUnit'";
+                            $result4 = mysqli_query($conn, $query4);
+                        }
+                    }
+
+                    $query5 = "UPDATE unit SET status = 'occupied' WHERE unitID = '$unit'";
+                    $result5 = mysqli_query($conn, $query5);
+
                     redirect("tenant.php", "Tenant updated successfully." , 'success');
                 }else{
                     redirect("tenant-edit.php?id=$tenantID", "Something went wrong.", 'error');

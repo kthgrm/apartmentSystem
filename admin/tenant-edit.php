@@ -80,6 +80,7 @@
                                                 <div class="col-md-2">
                                                     <div class="mb-3">
                                                         <label for="unit">Unit</label>
+                                                        <input type="hidden" name="prevUnit" value="<?= $tenantID['data']['unitID']; ?>">
                                                         <select name="unit" class="form-select" required>
                                                             <?php
                                                                 $unit = fetchAll('unit');
