@@ -163,4 +163,61 @@
             redirect("complaint-view.php?id=".$complaintID, "Failed to update request.", 'error');
         }
     }
+
+    if(isset($_POST['addUnit'])){
+        $unitID = validate($_POST['unitID']);
+        $numOfRoom = validate($_POST['numOfRoom']);
+        $unitRate = validate($_POST['unitRate']);
+        $status = validate($_POST['status']);
+
+        if(empty($unitID) || empty($numOfRoom) || empty($unitRate) || empty($status)){
+            redirect("unit-add.php", "Please fill all the input fields.", 'error');
+        }else{
+            $checkQuery = "SELECT * FROM unit WHERE unitID = ?";
+            $stmt = $conn->prepare($checkQuery);
+            $stmt->bind_param("s", $unitID);
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                redirect("unit-add.php", "Unit ID already exists. Please use a different ID.", 'error');
+            } else {
+                $query = "INSERT INTO unit (unitID, numOfRoom, unitRate, status) VALUES (?, ?, ?, ?)";
+                $stmt = $conn->prepare($query);
+                $stmt->bind_param("ssss", $unitID, $numOfRoom, $unitRate, $status);
+                $result = $stmt->execute();
+
+                if ($result) {
+                    redirect("unit.php", "Unit added successfully.", 'success');
+                } else {
+                    redirect("unit-add.php", "Failed to add unit.", 'error');
+                }
+            }
+        }
+    }
+
+    if(isset($_POST['editUnit'])){
+        $unitID = validate($_POST['unitID']);
+        $numOfRoom = validate($_POST['numOfRoom']);
+        $unitRate = validate($_POST['unitRate']);
+        $status = validate($_POST['status']);
+        
+        $unit = getByIdUnit('unit', $unitID);
+        if($unit['status'] != 200){
+            redirect("unit-edit.php?id=$unitID", "Unit not found.", 'error');
+        }
+
+        if(empty($unitID) || empty($numOfRoom) || empty($unitRate) || empty($status)){
+            redirect("unit-edit.php?id=$unitID", "Please fill all the input fields.", 'error');
+        }else{
+            $query = "UPDATE unit SET numOfRoom = '$numOfRoom', unitRate = '$unitRate', status = '$status' WHERE unitID = '$unitID'";
+            $result = mysqli_query($conn, $query);
+
+            if($result){
+                redirect("unit.php", "Unit updated successfully." , 'success');
+            }else{
+                redirect("unit-edit.php?id=$unitID", "Failed to update unit.", 'error');
+            }
+        }
+    }
 ?>

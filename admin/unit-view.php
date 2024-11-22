@@ -4,13 +4,16 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
+                    <?php
+                        $paramResult = checkParamID('id');
+                    ?>
                     <h4 class="font-weight-bolder">
                         Unit Details
-                        <a href="unit-edit.php?id=<?= $_GET['id']; ?>" class="btn btn-primary float-end">
-                            <i class="fa fa-edit"></i>
-                            Edit Unit
+                        <a href="unit-delete.php?id=<?= $paramResult; ?>" class="btn btn-danger float-end">
+                            <i class="fa fa-trash"></i>
+                            Delete Unit
                         </a>
-                        <a href="unit.php" class="btn btn-danger float-end mx-2">
+                        <a href="unit.php" class="btn btn-primary float-end mx-2">
                             <i class="fa fa-angle-left"></i>
                             Back
                         </a>
@@ -18,7 +21,6 @@
                 </div>
                 <div class="card-body">
                     <?php
-                        $paramResult = checkParamID('id');
                         if(!is_numeric($paramResult)){
                             echo '<h5>'.$paramResult.'</h5>';
                             return false;
@@ -49,6 +51,12 @@
                                                     <label>Unit Rate</label>
                                                     <p><?= $unit['data']['unitRate']; ?></p>
                                                 </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <a href="unit-edit.php?id=<?= $_GET['id']; ?>" class="btn btn-primary">
+                                                    <i class="fa fa-edit"></i>
+                                                    Edit Unit
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

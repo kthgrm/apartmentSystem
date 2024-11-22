@@ -262,7 +262,6 @@
         $table = validate($tablename);
         $id = validate($id);
         
-        // Delete from the specified table
         $query = "DELETE FROM $table WHERE tenantID = '$id' LIMIT 1";
         $result = mysqli_query($conn, $query);
         
@@ -271,6 +270,30 @@
         $userResult = mysqli_query($conn, $userQuery);
         
         return $result && $userResult;
+    }
+
+    function deleteQueryUnit($tablename, $id){
+        global $conn;
+        $table = validate($tablename);
+        $id = validate($id);
+        
+        try {
+            // Start a transaction
+            mysqli_begin_transaction($conn);
+    
+            // Delete the row in the unit table
+            $query = "DELETE FROM $table WHERE unitID = '$id' LIMIT 1";
+            $result = mysqli_query($conn, $query);
+    
+            // Commit the transaction
+            mysqli_commit($conn);
+    
+            return $result;
+        } catch (Exception $e) {
+            // Rollback the transaction in case of error
+            mysqli_rollback($conn);
+            return false;
+        }
     }
 
     function logoutSession(){
