@@ -14,7 +14,7 @@
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-home text-dark text-lg"></i>
                     </div>
-                    <span class="nav-link-text ms-1">Dashboard</span>
+                    <span class="nav-link-text ms-1">Home</span>
                 </a>
             </li>
 
@@ -23,7 +23,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'profile.php' ? 'active' : ''; ?>" href="profile.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['profile.php', 'profile-edit.php']) ? 'active' : ''; ?>" href="profile.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-users text-dark text-lg"></i>
                     </div>
@@ -32,7 +32,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['tenant.php', 'tenant-add.php', 'tenant-edit.php']) ? 'active' : ''; ?>" href="tenant.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php', 'tenant-add.php', 'tenant-edit.php']) ? 'active' : ''; ?>" href="payment.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-money text-dark text-lg"></i>
                     </div>

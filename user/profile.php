@@ -32,39 +32,41 @@
                 </div>
                 <div class="card-body">
                     <div class="row">
-                        <div class="col-md-12 text-center mb-2">
-                            <img src="<?php echo '../'.$user['tenantImage']; ?>" alt="Profile Picture" class="img-fluid img-thumbnail" style="border-radius:50%;max-width:300px">
+                        <div class="col"></div>
+                        <div class="col-md-6 col-lg-5 text-center mb-2">
+                            <img src="<?php echo '../'.$user['tenantImage']; ?>" alt="Profile Picture" class="img-fluid img-thumbnail" style="border-radius:50%;max-width:275px">
                         </div>
+                        <div class="col"></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col"></div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-5">
                             <h5 class="font-weight-bolder">Name</h5>
-                            <p><?php echo $name; ?></p>
+                            <p class="border rounded p-2"><?php echo $name; ?></p>
                         </div>
                         <div class="col"></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col"></div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-5">
                             <h5 class="font-weight-bolder">Contact Number</h5>
-                            <p><?php echo $contact; ?></p>
+                            <p class="border rounded p-2"><?php echo $contact; ?></p>
                         </div>
                         <div class="col"></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col"></div>
-                        <div class="col-md-6">
+                        <div class="col-md-6 col-lg-5">
                             <h5 class="font-weight-bolder">Email</h5>
-                            <p><?php echo $email; ?></p>
+                            <p class="border rounded p-2"><?php echo $email; ?></p>
                         </div>
                         <div class="col"></div>
                     </div>
                     <div class="row mb-2">
                         <div class="col"></div>
-                        <div class="col-md-6">
-                            <h5 class="font-weight-bolder">Unit</h5>
-                            <p><?php echo $unit; ?></p>
+                        <div class="col-md-6 col-lg-5">
+                            <h5 class="font-weight-bolder">Unit Number</h5>
+                            <p class="border rounded p-2"><?php echo $unit; ?></p>
                         </div>
                         <div class="col"></div>
                     </div>
