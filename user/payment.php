@@ -30,43 +30,37 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="card border shadow p-3">
-                                <h5 class="font-weight-bolder">Payment History
-                                    TEST TABLE
-                                </h5>
+                                <h5 class="font-weight-bolder">Payment History</h5>
+                                
                                 <table class="table table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Date</th>
+                                            <th>ID</th>
                                             <th>Amount</th>
-                                            <th>Status</th>
+                                            <th>Date</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>2021-09-01</td>
-                                            <td>₱ 1,000.00</td>
-                                            <td>PAID</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021-08-01</td>
-                                            <td>₱ 1,000.00</td>
-                                            <td>PAID</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021-07-01</td>
-                                            <td>₱ 1,000.00</td>
-                                            <td>PAID</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021-06-01</td>
-                                            <td>₱ 1,000.00</td>
-                                            <td>PAID</td>
-                                        </tr>
-                                        <tr>
-                                            <td>2021-05-01</td>
-                                            <td>₱ 1,000.00</td>
-                                            <td>PAID</td>
-                                        </tr>
+                                        <?php
+                                            $payment = getByIdUnitPayment($unit);
+                                            if (mysqli_num_rows($payment) > 0) {
+                                                foreach($payment as $paymentItem){
+                                        ?>
+                                                    <tr>
+                                                        <td><?= $paymentItem['paymentID']; ?></td>
+                                                        <td><?= $paymentItem['paymentAmount']; ?></td>
+                                                        <td><?= $paymentItem['paymentDate']; ?></td>
+                                                    </tr>
+                                        <?php
+                                                }
+                                            }else{
+                                        ?>
+                                                <tr>
+                                                    <td colspan="3" class="text-center">No record found</td>
+                                                </tr>
+                                        <?php
+                                            }
+                                        ?>
                                     </tbody>
                                 </table>
                             </div>

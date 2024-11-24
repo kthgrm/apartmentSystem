@@ -32,8 +32,12 @@ try {
 
             $data = json_decode($response->getBody(), true);
             $redirect = $data['data']['attributes']['checkout_url'];
+            $refNum = $data['data']['attributes']['reference_number'];
+            $_SESSION['refNum'] = $refNum;
+            $_SESSION['unitID'] = $unit;
+            echo "<script>alert('Open Payment link in a new tab.');</script>";
             echo "<script>window.open('$redirect', '_blank');</script>";
-            
+            echo "<a href='payment-verify.php'>Verify Payment</a>";
         } else {
             redirect('payment.php', 'Something Went Wrong.', 'error');
         }

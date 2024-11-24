@@ -151,6 +151,13 @@
         $result = mysqli_query($conn, $query);
         return $result;
     }
+    function getByIdUnitPayment($unitID){
+        global $conn;
+        $unit = validate($unitID);
+        $query = "SELECT paymentID, paymentAmount, paymentDate FROM payment WHERE unitID = '$unit'";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
 
     function getByIdComplaintJoinTenant($tableName, $id){
         global $conn;
@@ -300,5 +307,7 @@
         unset($_SESSION['auth']);
         unset($_SESSION['userType']);
         unset($_SESSION['loggedInUser']);
+        unset($_SESSION['refNum']);
+        unset($_SESSION['unitID']);
     }
 ?>

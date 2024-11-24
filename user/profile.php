@@ -24,7 +24,7 @@
                                 $_SESSION['unit'] = $user['unitID'];
                             }
                         ?>
-                        <a href="profile-edit.php?id=<?php echo $userID; ?>" class="btn btn-danger float-end">
+                        <a href="profile-edit.php?id=<?php echo $userID; ?>" class="btn btn-primary float-end">
                             <i class="fa fa-edit"></i>
                             Edit
                         </a>

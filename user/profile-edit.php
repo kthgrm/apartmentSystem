@@ -6,7 +6,7 @@
                 <div class="card-header">
                     <h4 class="font-weight-bolder">
                         Edit Profile
-                        <a href="profile.php" class="btn btn-primary float-end">
+                        <a href="profile.php" class="btn btn-danger float-end">
                             <i class="fa fa-angle-left"></i>
                             Back
                         </a>
