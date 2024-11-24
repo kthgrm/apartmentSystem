@@ -29,9 +29,8 @@
                                         <i class="fa fa-5x fa-building mb-2"></i>
                                         <br>
                                         <p class="text-sm mb-0 text-capitalize font-weight-bold">Unit</p>
-                                        <h5 class="font-weight-bolder mb-0">
-                                            <?= $unitItem['unitID'] ?>
-                                        </h5>
+                                        <h5 class="font-weight-bolder mb-0"><?= $unitItem['unitID']; ?></h5>
+                                        <p class="text-sm mb-0 text-capitalize"><?= $unitItem['status']; ?></p>
                                     </a>
                                 </div>
                             </div>

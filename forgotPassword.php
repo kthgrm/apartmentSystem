@@ -1,6 +1,5 @@
 <?php
-
-    $pageTitle = 'Login';
+    $pageTitle = 'forgotPassword';
     include('includes/header.php'); 
 
     if(isset($_SESSION['auth'])) {
@@ -25,26 +24,20 @@
                         <div class="col-md-12 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
                                 <?= alertMessage(); ?>
-                                <form action="login-code.php" method="post">
+                                <form action="resetCode.php" method="POST">
                                     <div class="row">
                                         <div class="col-md-12 mb-3 mb-md-4">
-                                            <span class="h1 fw-bold">Login</span>
+                                            <span class="h1 fw-bold">Forgot Password</span>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-md-4">
-                                        <label>Username</label>
-                                        <input type="text" name="username" class="form-control form-control-lg"/>
+                                        <h5>Enter Email</h5>
+                                        <input type="email" name="email" class="form-control form-control-lg"/>
                                     </div>
 
-                                    <div class="form-outline mb-md-4">
-                                        <label>Password</label>
-                                        <input type="password" name="password" class="form-control form-control-lg"/>
-                                    </div>
-
-                                    <div class="d-flex justify-content-between">
-                                        <a class="small text-muted align-self-center" href="forgotPassword.php">Forgot password?</a>
-                                        <button class="btn btn-m mb-0 btn-primary btn-warning" name="btnLogin" type="submit">Login</button>
+                                    <div class="col-md-12">
+                                        <button class="btn btn-m mb-0 btn-primary btn-warning float-end" name="btnSendCode" type="submit">Send Code</button>
                                     </div>
                                 </form>
 
@@ -58,4 +51,3 @@
 </div>
 
 <?php include('includes/footer.php'); ?>
-

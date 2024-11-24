@@ -59,6 +59,14 @@
         return $result;
     }
 
+    function fetchPaymentJoinTenant($tableName){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
     function checkParamID($paramType){
         if(isset($_GET[$paramType])){
             if($_GET[$paramType] != ''){

@@ -18,14 +18,10 @@
                 </a>
             </li>
 
-            <li class="nav-item mt-3">
-                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Manage</h6>
-            </li>
-
             <li class="nav-item">
                 <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['profile.php', 'profile-edit.php']) ? 'active' : ''; ?>" href="profile.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-                        <i class="fa fa-users text-dark text-lg"></i>
+                        <i class="fa fa-user text-dark text-lg"></i>
                     </div>
                     <span class="nav-link-text ms-1">Profile</span>
                 </a>
