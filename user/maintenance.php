@@ -4,7 +4,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="font-weight-bolder">
+                    <h5 class="font-weight-bolder">
                         Maintenance Request
                         <?php
                             if (isset($_SESSION['loggedInUser']['userID'])) {
@@ -22,10 +22,10 @@
                             }
                         ?>
                         <a href="maintenance-history.php?id=<?php echo $userID; ?>" class="btn btn-danger float-end">
-                            <i class="fa fa-history"></i>
+                            <!-- <i class="fa fa-history"></i> -->
                             History
                         </a>
-                    </h4>
+                    </h5>
                 </div>
                 <div class="card-body">
                     <form action="userCode.php" method="post">

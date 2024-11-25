@@ -1,5 +1,5 @@
 <?php
-    $pageTitle = 'Forgot Password';
+    $pageTitle = 'Reset Password';
     include('includes/header.php'); 
 
     if(isset($_SESSION['auth'])) {
@@ -24,20 +24,32 @@
                         <div class="col-md-12 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
                                 <?= alertMessage(); ?>
+                                <?php
+                                    if(isset($_GET['email'])) {
+                                        $email = $_GET['email'];
+                                    }else{
+                                        redirect('forgotPassword.php','Invalid request.','error');
+                                    }
+                                ?>
                                 <form action="resetCode.php" method="POST">
                                     <div class="row">
                                         <div class="col-md-12 mb-3 mb-md-4">
-                                            <span class="h1 fw-bold">Forgot Password</span>
+                                            <span class="h1 fw-bold">Reset Password</span>
                                         </div>
                                     </div>
 
                                     <div class="form-outline mb-md-4">
-                                        <h5>Enter Email</h5>
-                                        <input type="email" name="email" class="form-control form-control-lg"/>
+                                        <input type="email" name="email" value="<?= $email; ?>" hidden>
+                                        <h5>Password</h5>
+                                        <input type="password" name="password" class="form-control form-control-lg"/>
+                                    </div>
+                                    <div class="form-outline mb-md-4">
+                                        <h5>Confirm Password</h5>
+                                        <input type="password" name="confirmPassword" class="form-control form-control-lg"/>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <button class="btn btn-m mb-0 btn-primary btn-warning float-end" name="btnSendCode" type="submit">Send Code</button>
+                                        <button class="btn btn-m mb-0 btn-primary btn-warning float-end" name="btnResetPassword" type="submit" onclick="return confirm('Are you sure you want to reset your password?');">Confirm</button>
                                     </div>
                                 </form>
 

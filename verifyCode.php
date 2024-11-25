@@ -1,5 +1,6 @@
 <?php
-    $pageTitle = 'Forgot Password';
+
+    $pageTitle = 'Verify Code';
     include('includes/header.php'); 
 
     if(isset($_SESSION['auth'])) {
@@ -24,6 +25,13 @@
                         <div class="col-md-12 col-lg-7 d-flex align-items-center">
                             <div class="card-body p-4 p-lg-5 text-black">
                                 <?= alertMessage(); ?>
+                                <?php 
+                                    if(isset($_GET['email'])) {
+                                        $email = $_GET['email'];
+                                    }else{
+                                        redirect('forgotPassword.php','Invalid request.','error');
+                                    }
+                                ?>
                                 <form action="resetCode.php" method="POST">
                                     <div class="row">
                                         <div class="col-md-12 mb-3 mb-md-4">
@@ -32,12 +40,13 @@
                                     </div>
 
                                     <div class="form-outline mb-md-4">
-                                        <h5>Enter Email</h5>
-                                        <input type="email" name="email" class="form-control form-control-lg"/>
+                                        <input type="email" name="email" value="<?= $email; ?>" hidden> 
+                                        <h5>Enter Verification Code</h5>
+                                        <input type="text" name="resetCode" class="form-control form-control-lg"/>
                                     </div>
 
                                     <div class="col-md-12">
-                                        <button class="btn btn-m mb-0 btn-primary btn-warning float-end" name="btnSendCode" type="submit">Send Code</button>
+                                        <button class="btn btn-m mb-0 btn-primary btn-warning float-end" name="btnVerifyCode" type="submit">Verify Code</button>
                                     </div>
                                 </form>
 

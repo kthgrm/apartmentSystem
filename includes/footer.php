@@ -1,4 +1,4 @@
-    <?php if (basename($_SERVER['PHP_SELF']) != 'login.php' && basename($_SERVER['PHP_SELF']) != 'forgotPassword.php') {
+    <?php if (basename($_SERVER['PHP_SELF']) != 'login.php' && basename($_SERVER['PHP_SELF']) != 'forgotPassword.php' && basename($_SERVER['PHP_SELF']) != 'resetPassword.php') {
         include('footer-content.php'); 
         } 
     ?>
