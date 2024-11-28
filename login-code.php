@@ -20,6 +20,12 @@
                     'userID' => $row['userID'], 
                     'username' => $row['username']
                 ];
+
+                $userID = $row['userID'];
+                $userType = $row['type'];
+                $logType = 'login';
+                $logQuery = "INSERT INTO log (userID, type, logType) VALUES ('$userID', '$userType', '$logType')";
+                mysqli_query($conn, $logQuery);
                 
                 if($row['type'] == 'admin'){
                     header('location: admin/index.php');

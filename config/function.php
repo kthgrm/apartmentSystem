@@ -263,6 +263,16 @@
         return $result;
     }
 
+    function getUserLog($tableName){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table 
+                  LEFT JOIN admin ON $table.userID = admin.adminID 
+                  LEFT JOIN tenant ON $table.userID = tenant.tenantID";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
     function getCount($tableName){
         global $conn;
         $table = validate($tableName);

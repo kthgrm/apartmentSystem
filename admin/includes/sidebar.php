@@ -75,6 +75,52 @@
                     <span class="nav-link-text ms-1">Complaint</span>
                 </a>
             </li>
+
+            <li class="nav-item mt-3">
+                <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Report</h6>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="collapse" href="#reportDropdown" role="button" aria-expanded="false" aria-controls="reportDropdown">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-file-alt text-dark text-lg"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Report</span>
+                </a>
+                <?php
+                    $reportPages = ['tenant-report.php', 'maintenance-report.php', 'complaint-report.php', 'income-report.php', 'log-report.php'];
+                    $isActive = in_array(basename($_SERVER['PHP_SELF']), $reportPages);
+                ?>
+                <div class="collapse <?php echo $isActive ? 'show' : ''; ?>" id="reportDropdown">
+                    <ul class="ms-5 navbar-nav mb-1">
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'tenant-report.php' ? 'active' : ''; ?>" href="tenant-report.php">
+                                <span class="nav-link-text ms-1">Tenant</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'maintenance-report.php' ? 'active' : ''; ?>" href="maintenance-report.php">
+                                <span class="nav-link-text ms-1">Maintenance</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'complaint-report.php' ? 'active' : ''; ?>" href="complaint-report.php">
+                                <span class="nav-link-text ms-1">Complaint</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'income-report.php' ? 'active' : ''; ?>" href="income-report.php">
+                                <span class="nav-link-text ms-1">Income</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'log-report.php' ? 'active' : ''; ?>" href="log-report.php">
+                                <span class="nav-link-text ms-1">System Log</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
         </ul>
     </div>
     <div class="sidenav-footer mx-4 ">
