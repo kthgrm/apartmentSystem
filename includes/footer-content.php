@@ -1,4 +1,4 @@
-<div class="py-2 bg-light opacity-75<?php if ($pageTitle !== 'Inquire') echo ' fixed-bottom'; ?>">
+<div class="py-1 bg-light opacity-75<?php if ($pageTitle !== 'Inquire' && $pageTitle !== 'Gallery') echo ' fixed-bottom'; else echo ''; ?>">
     <div class="container">
         <div class="row">
             <div class="col-md-6">

@@ -159,10 +159,10 @@
         $result = mysqli_query($conn, $query);
         return $result;
     }
-    function getByIdUnitPayment($unitID){
+    function getByIdInvoicePayment($unitID){
         global $conn;
         $unit = validate($unitID);
-        $query = "SELECT paymentID, paymentAmount, paymentDate FROM payment WHERE unitID = '$unit'";
+        $query = "SELECT paymentID, paymentAmount, paymentDate FROM payment JOIN invoice ON payment.invoiceID = invoice.invoiceID WHERE unitID = '$unit'";
         $result = mysqli_query($conn, $query);
         return $result;
     }
@@ -235,6 +235,38 @@
         global $conn;
         $table = validate($tableName);
         $query = "SELECT * FROM $table WHERE unitID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+
+    function getByIdPaymentJoinTenant($tableName,$paramResult){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID WHERE paymentID = '$paramResult'";
         $result = mysqli_query($conn, $query);
 
         if($result){

@@ -73,7 +73,7 @@
                                     </div>
                                     <div class="col-md-12">
                                             <div class="mb-3 text-end">
-                                                <button type="submit" class="btn btn-primary" name="btnUpdateProfile" onclick="return confirm('Are you sure you want to submit this maintenance request?')">Update Profile</button>
+                                                <button type="submit" class="btn btn-primary" name="btnUpdateProfile" onclick="return confirm('Confirm Update?')">Update Profile</button>
                                             </div>
                                         </div>
                                 </div>

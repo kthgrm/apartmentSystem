@@ -21,16 +21,26 @@
         $paymentRefNum = $payment['attributes']['reference_number'];
 
         if($paymentStatus == 'paid' && $paymentRefNum == $refNum){
-            $unitID = $_SESSION['unitID'];
+            $invoiceID = $_SESSION['invoiceID'];
             $tenantID = $_SESSION['loggedInUser']['userID'];
             $paymentMethod = $payment['attributes']['payments'][0]['data']['attributes']['source']['type'];
             $amount = $payment['attributes']['amount'] / 100;
             $datePaid = date('Y-m-d');
-            $query = "INSERT INTO payment (unitID, tenantID, paymentDate, paymentAmount, paymentMethod, referenceNum) VALUES ('$unitID', '$tenantID', '$datePaid', '$amount', '$paymentMethod', '$paymentRefNum')";
+            
+            // Insert payment record
+            $query = "INSERT INTO payment (invoiceID, tenantID, paymentDate, paymentAmount, paymentMethod, referenceNum) VALUES ('$invoiceID', '$tenantID', '$datePaid', '$amount', '$paymentMethod', '$paymentRefNum')";
             $result = mysqli_query($conn, $query);
+            
             if($result){
-                redirect('payment.php', 'Payment Successful.', 'success');
+                // Update invoice status
+                $queryUpdate = "UPDATE invoice SET paymentStatus = 'paid' WHERE invoiceID = $invoiceID";
+                if (mysqli_query($conn, $queryUpdate)) {
+                    redirect('payment.php', 'Payment Successful.', 'success');
+                } else {
+                    echo "Error updating payment status: " . mysqli_error($conn);
+                }
             } else {
+                echo "Error inserting payment record: " . mysqli_error($conn);
                 redirect('payment.php', 'Something Went Wrong.', 'error');
             }
         } else {

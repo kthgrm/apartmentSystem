@@ -8,9 +8,10 @@ $client = new \GuzzleHttp\Client();
 
 try {
     if (isset($_POST['btnPay'])) {
+        $invoiceID = $_POST['invoiceID'];
         $unit = $_POST['unitID'];
-        if (isset($_POST['unitRate']) && !empty($_POST['unitRate'])) {
-            $amount = (int)validate($_POST['unitRate']) * 100;
+        if (isset($_POST['rentAmount']) && !empty($_POST['rentAmount'])) {
+            $amount = (float)validate($_POST['rentAmount']) * 100;
 
             $response = $client->request('POST', 'https://api.paymongo.com/v1/links', [
                 'body' => json_encode([
@@ -34,8 +35,8 @@ try {
             $redirect = $data['data']['attributes']['checkout_url'];
             $refNum = $data['data']['attributes']['reference_number'];
             $_SESSION['refNum'] = $refNum;
-            $_SESSION['unitID'] = $unit;
-            echo "<script>alert('Open Payment link in a new tab.');</script>";
+            $_SESSION['invoiceID'] = $invoiceID;
+            echo "<script>alert('Open Payment link in a new tab. Reference Number: $refNum');</script>";
             echo "<script>window.open('$redirect', '_blank');</script>";
             echo "<a href='payment-verify.php'>Verify Payment</a>";
         } else {

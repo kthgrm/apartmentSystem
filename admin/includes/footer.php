@@ -12,6 +12,34 @@
   <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+      // Update the text fields
+      document.getElementById('availableUnits').textContent = unitData.availableUnits;
+      document.getElementById('totalUnits').textContent = unitData.totalUnits;
+      document.getElementById('occupiedUnits').textContent = unitData.occupiedUnits;
+
+      // Create the chart
+      const ctx = document.getElementById('unitsChart').getContext('2d');
+      new Chart(ctx, {
+          type: 'doughnut',
+          data: {
+              labels: ['Available Units', 'Occupied Units'],
+              datasets: [{
+                  data: [unitData.availableUnits, unitData.occupiedUnits],
+                  backgroundColor: ['#4CAF50', '#F44336']
+              }]
+          },
+          options: {
+              responsive: true,
+              plugins: {
+                  legend: {
+                      display: false
+                  }
+              }
+          }
+      });
+  </script>
   <script>
     $(document).ready( function () {
       $('#myTable').DataTable();

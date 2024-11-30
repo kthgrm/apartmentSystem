@@ -68,8 +68,7 @@
                                                 <td><?= $paymentItem['paymentMethod']; ?></td>
                                                 <td><?= $paymentItem['referenceNum']; ?></td>
                                                 <td>
-                                                    <a href="tenant-edit.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-primary btn-sm">Edit</a>
-                                                    <a href="tenant-delete.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
+                                                    <a href="payment-view.php?id=<?= $paymentItem['paymentID']; ?>" class="btn mb-0 btn-info btn-sm">View</a>
                                                 </td>
                                             </tr>
                                 <?php

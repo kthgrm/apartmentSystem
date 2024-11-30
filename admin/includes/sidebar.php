@@ -50,7 +50,16 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php']) ? 'active' : ''; ?>" href="payment.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['invoice.php','invoice-generate.php']) ? 'active' : ''; ?>" href="invoice.php">
+                    <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                        <i class="fa fa-file-invoice text-dark text-lg"></i>
+                    </div>
+                    <span class="nav-link-text ms-1">Invoice</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php','payment-view.php']) ? 'active' : ''; ?>" href="payment.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-credit-card text-dark text-lg"></i>
                     </div>
@@ -88,7 +97,7 @@
                     <span class="nav-link-text ms-1">Report</span>
                 </a>
                 <?php
-                    $reportPages = ['tenant-report.php', 'maintenance-report.php', 'complaint-report.php', 'income-report.php', 'log-report.php'];
+                    $reportPages = ['tenant-report.php', 'maintenance-report.php', 'complaint-report.php', 'invoice-report.php' , 'payment-report.php', 'log-report.php'];
                     $isActive = in_array(basename($_SERVER['PHP_SELF']), $reportPages);
                 ?>
                 <div class="collapse <?php echo $isActive ? 'show' : ''; ?>" id="reportDropdown">
@@ -109,13 +118,18 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'income-report.php' ? 'active' : ''; ?>" href="income-report.php">
-                                <span class="nav-link-text ms-1">Income</span>
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'invoice-report.php' ? 'active' : ''; ?>" href="invoice-report.php">
+                                <span class="nav-link-text ms-1">Invoice</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'payment-report.php' ? 'active' : ''; ?>" href="payment-report.php">
+                                <span class="nav-link-text ms-1">Payment</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link <?php echo basename($_SERVER['PHP_SELF']) == 'log-report.php' ? 'active' : ''; ?>" href="log-report.php">
-                                <span class="nav-link-text ms-1">System Log</span>
+                                <span class="nav-link-text ms-1">Log</span>
                             </a>
                         </li>
                     </ul>
