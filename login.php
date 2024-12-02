@@ -37,7 +37,7 @@
                                         <input type="text" name="username" class="form-control form-control-lg"/>
                                     </div>
 
-                                    <div class="form-outline mb-md-4">
+                                    <div class="form-outline mb-md-4 mb-3">
                                         <label>Password</label>
                                         <input type="password" name="password" class="form-control form-control-lg"/>
                                     </div>

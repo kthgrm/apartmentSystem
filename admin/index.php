@@ -1,5 +1,4 @@
 <?php 
-
     include('includes/header.php'); 
 
     $totalUnitsQuery = "SELECT COUNT(*) as totalUnits FROM unit";
@@ -23,6 +22,62 @@
     echo '<script>const unitData = ' . json_encode($data) . ';</script>';
 ?>
 
+<?php
+    // Fetch total payment
+    $totalPaymentQuery = "SELECT SUM(paymentAmount) as totalPayment FROM payment JOIN invoice ON payment.invoiceID = invoice.invoiceID";
+    $totalPaymentResult = mysqli_query($conn, $totalPaymentQuery);
+    $totalPaymentRow = mysqli_fetch_assoc($totalPaymentResult);
+    $totalPayment = $totalPaymentRow['totalPayment'] ? $totalPaymentRow['totalPayment'] : 0;
+
+    // Fetch payment per month
+    $monthlyPaymentQuery = "SELECT monthYear as month, SUM(paymentAmount) as monthlyPayment FROM payment JOIN invoice ON payment.invoiceID = invoice.invoiceID WHERE paymentStatus = 'paid' GROUP BY monthYear ORDER BY STR_TO_DATE(monthYear, '%M %Y')";
+    $monthlyPaymentResult = mysqli_query($conn, $monthlyPaymentQuery);
+
+    $months = [];
+    $monthlyPayments = [];
+
+    while ($row = mysqli_fetch_assoc($monthlyPaymentResult)) {
+        $months[] = $row['month'];
+        $monthlyPayments[] = $row['monthlyPayment'];
+    }
+
+    // Prepare data for Chart.js
+    $data = [
+        'totalPayment' => $totalPayment,
+        'months' => $months,
+        'monthlyPayments' => $monthlyPayments
+    ];
+
+    // Encode the data as JSON to pass it to JavaScript
+    echo '<script>const paymentData = ' . json_encode($data) . ';</script>';
+?>
+
+<?php
+// Fetch rent collection percentage
+$currentMonthYear = date('F Y');
+$paidInvoicesQuery = "SELECT COUNT(*) as paidInvoices FROM invoice WHERE paymentStatus = 'paid' AND monthYear = '$currentMonthYear'";
+$paidInvoicesResult = mysqli_query($conn, $paidInvoicesQuery);
+$paidInvoicesRow = mysqli_fetch_assoc($paidInvoicesResult);
+$paidInvoices = $paidInvoicesRow['paidInvoices'] ? $paidInvoicesRow['paidInvoices'] : 0;
+
+$totalInvoicesQuery = "SELECT COUNT(*) as totalInvoices FROM invoice WHERE monthYear = '$currentMonthYear'";
+$totalInvoicesResult = mysqli_query($conn, $totalInvoicesQuery);
+$totalInvoicesRow = mysqli_fetch_assoc($totalInvoicesResult);
+$totalInvoices = $totalInvoicesRow['totalInvoices'] ? $totalInvoicesRow['totalInvoices'] : 0;
+
+$rentCollectionPercentage = $totalInvoices > 0 ? ($paidInvoices / $totalInvoices) * 100 : 0;
+
+// Prepare data for Chart.js
+$data = [
+    'paidInvoices' => $paidInvoices,
+    'totalInvoices' => $totalInvoices,
+    'rentCollectionPercentage' => $rentCollectionPercentage
+];
+
+// Encode the data as JSON to pass it to JavaScript
+echo '<script>const collectionData = ' . json_encode($data) . ';</script>';
+?>
+
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -35,7 +90,7 @@
                     <div class="col-md-9">
                         <div class="row">
                             <div class="col-md-4 mb-4">
-                                <div class="card card-body p3">
+                                <div class="card card-body p3 border">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Tenants</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <?= getCount('tenant') ?>
@@ -43,16 +98,7 @@
                                 </div>
                             </div>
                             <div class="col-md-4 mb-4">
-                                <div class="card card-body p3">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Request</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <?= getCount('maintenance') ?>
-                                    </h5>
-                                </div>
-                            </div>
-                            
-                            <div class="col-md-4 mb-4">
-                                <div class="card card-body p3">
+                                <div class="card card-body p3 border">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending Request</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <?php
@@ -64,19 +110,9 @@
                                     </h5>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 mb-4">
-                                <div class="card card-body p3">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Complaint</p>
-                                    <h5 class="font-weight-bolder mb-0">
-                                        <?= getCount('complaint') ?>
-                                    </h5>
-                                </div>
-                            </div>
                             
-                            <div class="col-md-3 mb-4">
-                                <div class="card card-body p3">
+                            <div class="col-md-4 mb-4">
+                                <div class="card card-body p3 border">
                                     <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending Complaint</p>
                                     <h5 class="font-weight-bolder mb-0">
                                         <?php
@@ -88,18 +124,24 @@
                                     </h5>
                                 </div>
                             </div>
-                            <div class="col-md-6 mb-4">
-                                <div class="card card-body p3">
-                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Payment This Month</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4 mb-4">
+                                <div class="card card-body p3 border">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Rent Collection</p>
                                     <h5 class="font-weight-bolder mb-0">
-                                        <?php
-                                            $query = "SELECT SUM(paymentAmount) as totalPayment FROM payment WHERE MONTH(paymentDate) = MONTH(CURRENT_DATE()) AND YEAR(paymentDate) = YEAR(CURRENT_DATE())";
-                                            $result = mysqli_query($conn, $query);
-                                            $row = mysqli_fetch_assoc($result);
-                                            $totalPayment = $row['totalPayment'] ? $row['totalPayment'] : 0;
-                                            echo '<h5 class="font-weight-bolder mb-0">'.$totalPayment.'</h5>';
-                                        ?>
+                                        <?php echo $paidInvoices . ' / ' . $totalInvoices; ?>
                                     </h5>
+                                    <canvas id="rentCollectionChart" width="200" height="200"></canvas>
+                                </div>
+                            </div>
+                            <div class="col-md-8 mb-4">
+                                <div class="card card-body p3 border">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Payment</p>
+                                    <h5 class="font-weight-bolder mb-0">
+                                        <?php echo $totalPayment; ?>
+                                    </h5>
+                                    <canvas id="paymentChart" width="400" height="180"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +150,7 @@
                     <div class="col-md-3 col-lg-3 mb-4">
                         <div class="card card-body p3 text-center border">
                             <h5>UNITS</h5>
-                            <canvas id="unitsChart" width="200" height="200"></canvas>
+                            <canvas id="unitsChart" width="75" height="75"></canvas>
                             <p>
                                 <strong>Available Units: </strong><span id="availableUnits"></span><br>
                                 <strong>Total Units: </strong><span id="totalUnits"></span><br>
@@ -116,9 +158,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    
                 </div>
             </div>
         </div>

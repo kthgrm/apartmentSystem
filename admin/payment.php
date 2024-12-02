@@ -44,6 +44,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
+                                    <th>Invoice</th>
                                     <th>Tenant</th>
                                     <th>Unit</th>
                                     <th>Date</th>
@@ -61,6 +62,7 @@
                                 ?>
                                             <tr>
                                                 <td><?= $paymentItem['paymentID']; ?></td>
+                                                <td><?= $paymentItem['invoiceID']; ?></td>
                                                 <td><?= $paymentItem['fname'].' '. $paymentItem['lname']; ?></td>
                                                 <td><?= $paymentItem['unitID']; ?></td>
                                                 <td><?= $paymentItem['paymentDate']; ?></td>
@@ -77,7 +79,7 @@
                                 ?>
 
                                         <tr>
-                                            <td colspan="7" class="text-center">No record found</td>
+                                            <td colspan="8" class="text-center">No record found</td>
                                         </tr>
                                         <?php
                                     }

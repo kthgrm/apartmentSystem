@@ -27,7 +27,7 @@
               labels: ['Available Units', 'Occupied Units'],
               datasets: [{
                   data: [unitData.availableUnits, unitData.occupiedUnits],
-                  backgroundColor: ['#4CAF50', '#F44336']
+                  backgroundColor: ['#4CAF50', '#f97316']
               }]
           },
           options: {
@@ -40,6 +40,56 @@
           }
       });
   </script>
+
+  <script>
+      // Create the chart
+      const paymentCtx = document.getElementById('paymentChart').getContext('2d');
+      new Chart(paymentCtx, {
+        type: 'bar',
+        data: {
+            labels: paymentData.months,
+            datasets: [{
+                label: 'Monthly Payment',
+                data: paymentData.monthlyPayments,
+                backgroundColor: '#f97316'
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+      });
+  </script>
+
+  <script>
+      // Create the semi-circle chart for rent collection
+      const ctx2 = document.getElementById('rentCollectionChart').getContext('2d');
+      new Chart(ctx2, {
+          type: 'bar',
+          data: {
+              labels: ['Paid', 'Unpaid'],
+              datasets: [{
+                  data: [collectionData.paidInvoices, collectionData.totalInvoices - collectionData.paidInvoices],
+                  backgroundColor: ['#4CAF50', '#f97316']
+              }]
+          },
+          options: {
+              responsive: true,
+              rotation: -Math.PI,
+              circumference: Math.PI,
+              plugins: {
+                  legend: {
+                      display: false
+                  }
+              }
+          }
+      });
+  </script>
+  
   <script>
     $(document).ready( function () {
       $('#myTable').DataTable();

@@ -34,6 +34,10 @@
                                                 <td><?= $payment['data']['paymentID'] ?></td>
                                             </tr>
                                             <tr>
+                                                <th style="width: 30%;">Invoice ID</th>
+                                                <td><?= $payment['data']['invoiceID'] ?></td>
+                                            </tr>
+                                            <tr>
                                                 <th style="width: 30%;">Tenant</th>
                                                 <td><?= $payment['data']['fname'].' '.$payment['data']['lname'] ?></td>
                                             </tr>

@@ -67,6 +67,14 @@
         return $result;
     }
 
+    function fetchLeaseTenant($tableName){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM lease JOIN tenant ON lease.tenantID = tenant.tenantID";
+        $result = mysqli_query($conn, $query);
+        return $result;
+    }
+
     function checkParamID($paramType){
         if(isset($_GET[$paramType])){
             if($_GET[$paramType] != ''){

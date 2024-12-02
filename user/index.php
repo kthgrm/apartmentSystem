@@ -23,7 +23,7 @@
                                             
                                             // Check if the unitID is paid for the current month
                                             $currentMonth = date("Y-m");
-                                            $query = "SELECT paymentStatus FROM invoice WHERE unitID = '$unitID' AND DATE_FORMAT(issueDate, '%Y-%m') = '$currentMonth'";
+                                            $query = "SELECT paymentStatus FROM invoice WHERE unitID = '$unitID' ORDER BY issueDate DESC LIMIT 1";
                                             $paymentResult = mysqli_query($conn, $query);
                                             
                                             if (mysqli_num_rows($paymentResult) > 0) {
@@ -41,7 +41,32 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        <div class="col-md-6 mb-4">
+                            <div class="card border">
+                                <div class="card-header pb-0">
+                                    <h5>Lease Until</h5>
+                                </div>
+                                <div class="card-body py-0">
+                                    <?php
+                                        if (isset($_SESSION['loggedInUser']['userID'])) {
+                                            $result = fetchUserTenant($_SESSION['loggedInUser']['userID']);
+                                            $user = $result->fetch_assoc();
+                                            $unitID = $user['unitID'];
+                                            
+                                            $query = "SELECT endDate FROM lease WHERE unitID = '$unitID' ORDER BY startDate DESC LIMIT 1";
+                                            $leaseResult = mysqli_query($conn, $query);
+                                            
+                                            if (mysqli_num_rows($leaseResult) > 0) {
+                                                $leaseRow = mysqli_fetch_assoc($leaseResult);
+                                                echo "<p>" . date("F j, Y", strtotime($leaseRow['endDate'])) . "</p>";
+                                            } else {
+                                                echo "<p>No lease information available</p>";
+                                            }
+                                        }
+                                    ?>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-6 col-md-6 col-lg-3 mb-4">
