@@ -14,10 +14,10 @@
     }
 </style>
 
-    <div class="container py-4">
-        <div class="row">
+    <div class="container py-5">
+        <div class="row" style="height: 589px;">
             <div class="col-md-10 col-lg-6 mx-auto">
-                <div class="card card-body p-5">
+                <div class="card card-body p-4">
                     <?= alertMessage(); ?>
                     <form action="sendmail.php" method="POST">
                         <h3 class="text-center">Inquiry</h3>
@@ -33,7 +33,7 @@
                             <label>Phone Number</label>
                             <input type="text" name="phone" class="form-control" required>
                         </div>
-                        <div class="mb-md-3 mb-lg-4">
+                        <div class="mb-3">
                             <label>Inquiry Message</label>
                             <textarea name="message" class="form-control" rows="6" required></textarea>
                         </div>
