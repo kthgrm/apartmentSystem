@@ -1,5 +1,5 @@
 <?php include('includes/header.php'); ?>
-    <?= alertMessage(); ?>
+    
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -13,6 +13,7 @@
                     </h4>
                 </div>
                 <div class="card-body">
+                    <?= alertMessage(); ?>
                     <?php
                         $paramResult = checkParamID('id');
                         if(!is_numeric($paramResult)){
@@ -40,19 +41,19 @@
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label>First Name</label>
-                                                    <input type="text" name="fname" class="form-control" value="<?php echo $profile['data']['fname']; ?>">
+                                                    <input type="text" name="fname" class="form-control" value="<?php echo $profile['data']['fname']; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label>Middle Name</label>
-                                                    <input type="text" name="mname" class="form-control" value="<?php echo $profile['data']['mname']; ?>">
+                                                    <input type="text" name="mname" class="form-control" value="<?php echo $profile['data']['mname']; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-4">
                                                 <div class="mb-3">
                                                     <label>Last Name</label>
-                                                    <input type="text" name="lname" class="form-control" value="<?php echo $profile['data']['lname']; ?>">
+                                                    <input type="text" name="lname" class="form-control" value="<?php echo $profile['data']['lname']; ?>" required>
                                                 </div>
                                             </div>
                                         </div>
@@ -60,22 +61,36 @@
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label>Contact</label>
-                                                    <input type="text" name="contact" class="form-control" value="<?php echo $profile['data']['contact']; ?>">
+                                                    <input type="text" name="contact" class="form-control" value="<?php echo $profile['data']['contact']; ?>" required>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
                                                 <div class="mb-3">
                                                     <label>Email</label>
-                                                    <input type="text" name="email" class="form-control" value="<?php echo $profile['data']['email']; ?>">
+                                                    <input type="text" name="email" class="form-control" value="<?php echo $profile['data']['email']; ?>" required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="username">Username</label>
+                                                    <input type="text" name="username" value="<?= $profile['data']['username']; ?>" class="form-control" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="mb-3">
+                                                    <label for="password">Password</label>
+                                                    <input type="password" name="password" value="<?= $profile['data']['password']; ?>" class="form-control" required>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-md-12">
-                                            <div class="mb-3 text-end">
-                                                <button type="submit" class="btn btn-primary" name="btnUpdateProfile" onclick="return confirm('Confirm Update?')">Update Profile</button>
-                                            </div>
+                                        <div class="mb-3 text-end">
+                                            <button type="submit" class="btn btn-primary" name="btnUpdateProfile" onclick="return confirm('Confirm Update?')">Update Profile</button>
                                         </div>
+                                    </div>
                                 </div>
 
                     <?php

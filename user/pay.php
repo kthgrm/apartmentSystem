@@ -1,3 +1,5 @@
+<?php include('includes/header.php'); ?>
+
 <?php
 
 require_once('../vendor/autoload.php');
@@ -36,9 +38,8 @@ try {
             $refNum = $data['data']['attributes']['reference_number'];
             $_SESSION['refNum'] = $refNum;
             $_SESSION['invoiceID'] = $invoiceID;
-            echo "<script>alert('Open Payment link in a new tab. Reference Number: $refNum');</script>";
+            echo "<script>alert('Open Payment link in a new tab.');</script>";
             echo "<script>window.open('$redirect', '_blank');</script>";
-            echo "<a href='payment-verify.php'>Verify Payment</a>";
         } else {
             redirect('payment.php', 'Something Went Wrong.', 'error');
         }
@@ -53,3 +54,17 @@ try {
 }
 
 ?>
+    
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="font-weight-bolder">Payment</h4>
+            </div>
+            <div class="card-body">
+                <a href='payment-verify.php' class="btn btn-primary">Verify Payment</a>
+            </div>
+        </div>
+    </div>
+    
+
+<?php include('includes/footer.php'); ?>

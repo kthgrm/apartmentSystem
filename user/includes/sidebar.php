@@ -28,7 +28,7 @@
             </li>
             
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php', 'tenant-add.php', 'tenant-edit.php']) ? 'active' : ''; ?>" href="payment.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php', 'pay.php']) ? 'active' : ''; ?>" href="payment.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-money text-dark text-lg"></i>
                     </div>

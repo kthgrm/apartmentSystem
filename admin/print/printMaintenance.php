@@ -6,10 +6,9 @@ require '../../config/dbcon.php';
 class PDF extends FPDF{
     function Header(){
         $this->SetFont('Arial', 'B', 20);
-        $this->Cell(30);
-        $this->Image('../../assets/image/logo-b.png', 10, 10, 25);
-        $this->Cell(100, 25, 'Maintenance Report', 0, 1);
-        $this->Ln(5);
+        $this->Image('../assets/image/logo-g.png', 30, 75, 150, 150);
+        $this->Cell(100, 10, 'Maintenance Report', 0, 1);
+        $this->Ln(1);
 
         $this->SetFont('Arial', 'B', 11);
         $this->SetFillColor(255, 131, 0);

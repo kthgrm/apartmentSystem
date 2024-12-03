@@ -123,7 +123,7 @@
     function getProfile($tableName, $id){
         global $conn;
         $table = validate($tableName);
-        $query = "SELECT * FROM $table WHERE tenantID = '$id' LIMIT 1";
+        $query = "SELECT * FROM $table JOIN user ON $table.tenantID = user.userID WHERE tenantID = '$id' LIMIT 1";
         $result = mysqli_query($conn, $query);
 
         if($result){

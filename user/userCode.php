@@ -88,6 +88,15 @@
                 
                 move_uploaded_file($_FILES['tenantImage']['tmp_name'], $path.$filename);
             }
+            $username = validate($_POST['username']);
+            $password = validate($_POST['password']);
+
+            $queryUser = "UPDATE user SET username = '$username', password = '$password' WHERE userID = '$id'";
+            $resultUser = mysqli_query($conn, $queryUser);
+
+            if(!$resultUser){
+                redirect("profile-edit.php", "Failed to update username and password.", 'error');
+            }
             redirect("profile.php", "Profile updated successfully." , 'success');
         } else {
             redirect("profile-edit.php", "Failed to update profile.", 'error');
