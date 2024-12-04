@@ -294,4 +294,26 @@
             }
         }
     }
+
+    if(isset($_POST['addPayment'])){
+        $invoiceID = validate($_POST['invoiceID']);
+        $tenantID = validate($_POST['tenantID']);
+        $paymentDate = validate($_POST['paymentDate']);
+        $paymentAmount = validate($_POST['paymentAmount']);
+        $paymentMethod = validate($_POST['paymentMethod']);
+        $referenceNum = validate($_POST['referenceNum']);
+
+        if(empty($invoiceID) || empty($tenantID) || empty($paymentDate) || empty($paymentAmount) || empty($paymentMethod)){
+            redirect("payment-add.php", "Please fill all the input fields.", 'error');
+        }else{
+            $query = "INSERT INTO payment (invoiceID, tenantID, paymentDate, paymentAmount, paymentMethod, referenceNum) VALUES ('$invoiceID', '$tenantID', '$paymentDate', '$paymentAmount', '$paymentMethod', '$referenceNum')";
+            $result = mysqli_query($conn, $query);
+
+            if($result){
+                redirect("payment.php", "Payment added successfully." , 'success');
+            }else{
+                redirect("payment-add.php", "Failed to add payment.", 'error');
+            }
+        }
+    }
 ?>

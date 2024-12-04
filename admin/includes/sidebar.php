@@ -59,7 +59,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php','payment-view.php']) ? 'active' : ''; ?>" href="payment.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['payment.php','payment-view.php','payment-add.php']) ? 'active' : ''; ?>" href="payment.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-credit-card text-dark text-lg"></i>
                     </div>

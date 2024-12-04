@@ -5,10 +5,12 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6 col-lg-8">
-                            <h4 class="font-weight-bolder">Payment List</h4>
+                        <div class="col-md-6 col-lg-6">
+                            <h4 class="font-weight-bolder">
+                                Payment List
+                            </h4>
                         </div>
-                        <div class="col-md-6 col-lg-4 text-end">
+                        <div class="col-md-4 col-lg-4 text-end">
                             <form action="" method="GET">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-7">
@@ -20,6 +22,12 @@
                                     </div>
                                 </div>
                             </form>
+                        </div>
+                        <div class="col-md-2 col-lg-2">
+                            <a href="payment-add.php" class="btn btn-primary float-end">
+                                <i class="fa fa-plus"></i>
+                                Add Payment
+                            </a>
                         </div>
                     </div>
                 </div>
