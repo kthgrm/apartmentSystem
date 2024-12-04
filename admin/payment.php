@@ -12,7 +12,7 @@
                             <form action="" method="GET">
                                 <div class="row">
                                     <div class="col-md-6 col-lg-7">
-                                        <input type="date" name="date" class="form-control" value="<?= isset($_GET['date']) == true ? $_GET['date']:'' ?>">
+                                        <input type="date" name="date" class="form-control" value="<?= isset($_GET['date']) ? $_GET['date'] : '' ?>">
                                     </div>
                                     <div class="col-md-6 col-lg-5">
                                         <button type="submit" class="btn btn-primary">Filter</button>
@@ -27,16 +27,16 @@
                     
                     <?= alertMessage(); ?>
                     <?php
-                        $query = "SELECT * FROM payment JOIN tenant ON payment.tenantID = tenant.tenantID";
+                        $query = "SELECT payment.*, tenant.fname, tenant.lname, tenant.unitID FROM payment JOIN tenant ON payment.tenantID = tenant.tenantID";
                         if (isset($_GET['date']) && !empty($_GET['date'])) {
                             $date = validate($_GET['date']);
                             $query .= " WHERE paymentDate = '$date'";
                         }
                         
-                        $complaint = mysqli_query($conn, $query);
+                        $result = mysqli_query($conn, $query);
 
-                        if ($complaint) {
-                            if (mysqli_num_rows($complaint) > 0) {
+                        if ($result) {
+                            if (mysqli_num_rows($result) > 0) {
                     ?>
 
                     <div class="table-responsive">
@@ -56,44 +56,32 @@
                             </thead>
                             <tbody>
                                 <?php
-                                    $payment = fetchPaymentJoinTenant('payment');
-                                    if (mysqli_num_rows($payment) > 0) {
-                                        foreach($payment as $paymentItem) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
                                 ?>
                                             <tr>
-                                                <td><?= $paymentItem['paymentID']; ?></td>
-                                                <td><?= $paymentItem['invoiceID']; ?></td>
-                                                <td><?= $paymentItem['fname'].' '. $paymentItem['lname']; ?></td>
-                                                <td><?= $paymentItem['unitID']; ?></td>
-                                                <td><?= $paymentItem['paymentDate']; ?></td>
-                                                <td><?= $paymentItem['paymentAmount']; ?></td>
-                                                <td><?= $paymentItem['paymentMethod']; ?></td>
-                                                <td><?= $paymentItem['referenceNum']; ?></td>
+                                                <td><?= $row['paymentID']; ?></td>
+                                                <td><?= $row['invoiceID']; ?></td>
+                                                <td><?= $row['fname'] . ' ' . $row['lname']; ?></td>
+                                                <td><?= $row['unitID']; ?></td>
+                                                <td><?= $row['paymentDate']; ?></td>
+                                                <td><?= $row['paymentAmount']; ?></td>
+                                                <td><?= $row['paymentMethod']; ?></td>
+                                                <td><?= $row['referenceNum']; ?></td>
                                                 <td>
-                                                    <a href="payment-view.php?id=<?= $paymentItem['paymentID']; ?>" class="btn mb-0 btn-info btn-sm">View</a>
+                                                <a href="payment-view.php?id=<?= $row['paymentID']; ?>" class="btn mb-0 btn-info btn-sm">View</a>
                                                 </td>
                                             </tr>
                                 <?php
                                         }
-                                    }else{
-                                ?>
-
-                                        <tr>
-                                            <td colspan="8" class="text-center">No record found</td>
-                                        </tr>
-                                        <?php
+                                    } else {
+                                        echo "<div class='alert alert-warning'>No payments found for the selected date.</div>";
                                     }
+                                } else {
+                                    echo "<div class='alert alert-danger'>Error executing query: " . mysqli_error($conn) . "</div>";
+                                }
                                 ?>
                             </tbody>
                         </table>
-                        <?php
-                                } else {
-                                    echo '<h5>No Record Found</h5>';
-                        }
-                            } else {
-                                echo '<h5>Something Went Wrong</h5>';
-                            }
-                        ?>
                     </div>
                 </div>
             </div>
