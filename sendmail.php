@@ -2,6 +2,10 @@
     require('config/function.php');
     require_once 'vendor/autoload.php';
 
+    use Symfony\Component\Mailer\Transport;
+    use Symfony\Component\Mailer\Mailer;
+    use Symfony\Component\Mime\Email;
+
     $host = "smtp.gmail.com";
     $port = "587";
     $sslOrTls = "tls";
@@ -25,34 +29,19 @@
             <p>Phone Number: '.$phone.'</p>
             <p>Message: '.$message.'</p>
         </div>';
-
         try{
-            // Create the Transport
-            $transport = (new Swift_SmtpTransport($host,$port,$sslOrTls))
-                ->setUsername($setUsername)
-                ->setPassword($setPassword)
+            $transport = Transport::fromDsn('smtp://estrellaapartment110@gmail.com:plhycyntzwbkgohn@smtp.gmail.com:587');
+            $mailer = new Mailer($transport);
+            $message = (new Email())
+                ->from('estrellaapartment110@gmail.com')
+                ->to('estrellaapartment110@gmail.com')
+                ->subject($subject)
+                ->html($bodyContent)
             ;
-
-            // Create the Mailer using your created Transport
-            $mailer = new Swift_Mailer($transport);
-
-            // Create a message
-            $message = (new Swift_Message($subject))
-                ->setFrom([$emailAddress => 'Estrella Apartment'])
-                ->setTo([$sendEmailAddress])
-                ->setBody($bodyContent, 'text/html')
-            ;
-
-            // Send the message
-            $result = $mailer->send($message);
-            if($result){
-                redirect('inquire.php','Inquiry Sent Successfully. We will get back to you asap.','success');
-            }else{
-                redirect('inquire.php','Something went wrong. Please try again.','error');
-            }
+            $mailer->send($message);
+            redirect('inquire.php','Inquiry Sent Successfully. We will get back to you asap.','success');
         }catch(\Exception $e){
             redirect('inquire.php','Something went wrong: '. $e->getMessage(),'error');
         }
     }
-
 ?>

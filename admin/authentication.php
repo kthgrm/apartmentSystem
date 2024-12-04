@@ -1,5 +1,4 @@
 <?php
-
     if(isset($_SESSION['auth'])){
         if($_SESSION['userType']){
             $role = validate($_SESSION['userType']);
