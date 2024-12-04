@@ -1,5 +1,14 @@
 <?php include('includes/header.php') ?>
 
+<?php
+// Update paymentStatus to 'overdue' for invoices where dueDate is less than the current date and paymentStatus is 'unpaid'
+    $updateQuery = "UPDATE invoice SET paymentStatus = 'overdue' WHERE dueDate < CURDATE() AND paymentStatus = 'unpaid'";
+    if (mysqli_query($conn, $updateQuery)) {
+    } else {
+        redirect('invoice.php', 'Error updating payment status: ' . mysqli_error($conn),'error');
+    }
+?>
+
     <div class="row">
         <div class="col-md-12">
             <div class="card">
@@ -45,8 +54,8 @@
                                                 <td><?= $invoiceItem['dueDate']; ?></td>
                                                 <td><?= $invoiceItem['paymentStatus']; ?></td>
                                                 <td>
-                                                    <a href="tenant-edit.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-success btn-sm">Edit</a>
-                                                    <a href="tenant-delete.php?id=<?= $tenantItem['tenantID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
+                                                    <a href="invoice-edit.php?id=<?= $invoiceItem['invoiceID']; ?>" class="btn mb-0 btn-success btn-sm">Edit</a>
+                                                    <a href="invoice-delete.php?id=<?= $invoiceItem['invoiceID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
                                                 </td>
                                             </tr>
                                 <?php

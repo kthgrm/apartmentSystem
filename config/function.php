@@ -70,7 +70,7 @@
     function fetchLeaseTenant($tableName){
         global $conn;
         $table = validate($tableName);
-        $query = "SELECT * FROM lease JOIN tenant ON lease.tenantID = tenant.tenantID";
+        $query = "SELECT l.*, t.fname, t.lname FROM $table l JOIN tenant t ON l.tenantID = t.tenantID";
         $result = mysqli_query($conn, $query);
         return $result;
     }
@@ -211,6 +211,70 @@
         global $conn;
         $table = validate($tableName);
         $query = "SELECT * FROM $table JOIN tenant ON $table.tenantID = tenant.tenantID WHERE requestID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+    
+    function getByIdInvoice($tableName, $id){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table WHERE invoiceID = '$id' LIMIT 1";
+        $result = mysqli_query($conn, $query);
+
+        if($result){
+            if(mysqli_num_rows($result) == 1){
+                $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
+                $response = [
+                    'status' => 200,
+                    'message' => 'Data Record',
+                    'data' => $row
+                ];
+                return $response;
+            }else{
+                $response = [
+                    'status' => '404',
+                    'message' => 'No Data Record'
+                ];
+                return $response;
+            }
+        }else{
+            $response = [
+                'status' => '500',
+                'message' => 'Something went wrong'
+            ];
+            return $response;
+        }
+        return $result;
+    }
+
+    function getByIdLease($tableName, $id){
+        global $conn;
+        $table = validate($tableName);
+        $query = "SELECT * FROM $table JOIN tenant on $table.tenantID = tenant.tenantID WHERE leaseID = '$id' LIMIT 1";
         $result = mysqli_query($conn, $query);
 
         if($result){

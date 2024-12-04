@@ -136,6 +136,60 @@
         }
     }
 
+    if(isset($_POST['updateLease'])){
+        $leaseID = validate($_POST['leaseID']);
+        $unitID = validate($_POST['unitID']);
+        $tenantID = validate($_POST['tenantID']);
+        $startDate = validate($_POST['startDate']);
+        $endDate = validate($_POST['endDate']);
+        
+        $lease = getByIdLease('lease', $leaseID);
+        if($lease['status'] != 200){
+            redirect("lease-edit.php?id=$leaseID", "Lease not found.", 'error');
+        }
+
+        if(empty($unitID) || empty($tenantID) || empty($startDate) || empty($endDate)){
+            redirect("lease-edit.php?id=$leaseID", "Please fill all the input fields.", 'error');
+        }else{
+            $query = "UPDATE lease SET unitID = '$unitID', tenantID = '$tenantID', startDate = '$startDate', endDate = '$endDate' WHERE leaseID = '$leaseID'";
+            $result = mysqli_query($conn, $query);
+
+            if($result){
+                redirect("lease.php", "Lease updated successfully." , 'success');
+            }else{
+                redirect("lease-edit.php?id=$leaseID", "Failed to update lease.", 'error');
+            }
+        }
+    }
+
+    if(isset($_POST['updateInvoice'])){
+        $invoiceID = validate($_POST['invoiceID']);
+        $unitID = validate($_POST['unitID']);
+        $monthYear = validate($_POST['monthYear']);
+        $rentAmount = validate($_POST['rentAmount']);
+        $issueDate = validate($_POST['issueDate']);
+        $dueDate = validate($_POST['dueDate']);
+        $paymentStatus = validate($_POST['paymentStatus']);
+        
+        $invoice = getByIdInvoice('invoice', $invoiceID);
+        if($invoice['status'] != 200){
+            redirect("invoice-edit.php?id=$invoiceID", "Invoice not found.", 'error');
+        }
+
+        if(empty($unitID) || empty($monthYear) || empty($rentAmount) || empty($issueDate) || empty($dueDate) || empty($paymentStatus)){
+            redirect("invoice-edit.php?id=$invoiceID", "Please fill all the input fields.", 'error');
+        }else{
+            $query = "UPDATE invoice SET unitID = '$unitID', monthYear = '$monthYear', rentAmount = '$rentAmount', issueDate = '$issueDate', dueDate = '$dueDate', paymentStatus = '$paymentStatus' WHERE invoiceID = '$invoiceID'";
+            $result = mysqli_query($conn, $query);
+
+            if($result){
+                redirect("invoice.php", "Invoice updated successfully." , 'success');
+            }else{
+                redirect("invoice-edit.php?id=$invoiceID", "Failed to update invoice.", 'error');
+            }
+        }
+    }
+
     if(isset($_POST['updateRequestStatus'])){
         $status = validate($_POST['status']);
         $requestID = validate($_POST['requestID']);
@@ -217,6 +271,26 @@
                 redirect("unit.php", "Unit updated successfully." , 'success');
             }else{
                 redirect("unit-edit.php?id=$unitID", "Failed to update unit.", 'error');
+            }
+        }
+    }
+
+    if(isset($_POST['addLease'])){
+        $tenantID = validate($_POST['tenantID']);
+        $unitID = validate($_POST['unitID']);
+        $leaseStartDate = validate($_POST['leaseStartDate']);
+        $leaseEndDate = validate($_POST['leaseEndDate']);
+
+        if(empty($tenantID) || empty($unitID) || empty($leaseStartDate) || empty($leaseEndDate)){
+            redirect("lease-add.php", "Please fill all the input fields.", 'error');
+        }else{
+            $query = "INSERT INTO lease (tenantID, unitID, startDate, endDate) VALUES ('$tenantID', '$unitID', '$leaseStartDate', '$leaseEndDate')";
+            $result = mysqli_query($conn, $query);
+
+            if($result){
+                redirect("lease.php", "Lease added successfully." , 'success');
+            }else{
+                redirect("lease-add.php", "Failed to add lease.", 'error');
             }
         }
     }

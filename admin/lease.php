@@ -6,7 +6,7 @@
                 <div class="card-header">
                     <h4 class="font-weight-bolder">
                         Lease
-                        <a href="tenant-add.php" class="btn btn-primary float-end">
+                        <a href="lease-add.php" class="btn btn-primary float-end">
                             <i class="fa fa-plus"></i>
                             Add Lease
                         </a>
@@ -41,8 +41,8 @@
                                                 <td><?= $leaseItem['startDate']; ?></td>
                                                 <td><?= $leaseItem['endDate']; ?></td>
                                                 <td>
-                                                    <a href="tenant-edit.php?id=<?= $leaseItem['leaseID']; ?>" class="btn mb-0 btn-success btn-sm">Edit</a>
-                                                    <a href="tenant-delete.php?id=<?= $leaseItem['leaseID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
+                                                    <a href="lease-edit.php?id=<?= $leaseItem['leaseID']; ?>" class="btn mb-0 btn-success btn-sm">Edit</a>
+                                                    <a href="lease-delete.php?id=<?= $leaseItem['leaseID']; ?>" class="btn mb-0 btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this data?')">Delete</a>
                                                 </td>
                                             </tr>
                                 <?php

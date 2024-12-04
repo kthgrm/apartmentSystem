@@ -41,7 +41,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['lease.php','lease-add.php']) ? 'active' : ''; ?>" href="lease.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['lease.php','lease-add.php','lease-edit.php']) ? 'active' : ''; ?>" href="lease.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-book text-dark text-lg"></i>
                     </div>
@@ -50,7 +50,7 @@
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['invoice.php','invoice-generate.php']) ? 'active' : ''; ?>" href="invoice.php">
+                <a class="nav-link <?php echo in_array(basename($_SERVER['PHP_SELF']), ['invoice.php','invoice-generate.php','invoice-edit.php']) ? 'active' : ''; ?>" href="invoice.php">
                     <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
                         <i class="fa fa-file-invoice text-dark text-lg"></i>
                     </div>

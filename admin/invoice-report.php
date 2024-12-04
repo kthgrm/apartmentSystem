@@ -11,6 +11,7 @@
                         </div>
                         <div class="col-md-6">
                             <div class="row">
+                                <div class="col"></div>
                                 <div class="col-md-3 col-lg-3">
                                     <pre class="mb-0 ms-1">Year</pre>
                                     <select class="form-select" name="year">
@@ -49,7 +50,7 @@
                                         <option value="unpaid" <?= (isset($_POST['sort']) && $_POST['sort'] == 'unpaid') ? 'selected' : ''; ?>>Unpaid</option>
                                     </select>
                                 </div>
-                                <div class="col-md-3 col-lg-3">
+                                <div class="col-md-2 col-lg-2">
                                     <pre class="mb-0"> </pre>
                                     <button type="submit" name="submit" class="btn btn-primary">Submit</button>
                                 </div>
