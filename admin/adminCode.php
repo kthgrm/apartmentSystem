@@ -310,7 +310,10 @@
             $result = mysqli_query($conn, $query);
 
             if($result){
-                redirect("payment.php", "Payment added successfully." , 'success');
+                $query2 = "UPDATE invoice SET paymentStatus = 'paid' WHERE invoiceID = '$invoiceID'";
+                $result2 = mysqli_query($conn, $query2);
+
+                redirect("payment.php", "Payment added successfully.", 'success');
             }else{
                 redirect("payment-add.php", "Failed to add payment.", 'error');
             }

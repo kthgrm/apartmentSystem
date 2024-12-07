@@ -9,7 +9,7 @@
             if($result){
                 if(mysqli_num_rows($result) == 0){
                     logoutSession();
-                    redirect('../login.php', 'Access Denied.HAHA', 'error');
+                    redirect('../login.php', 'Access Denied.', 'error');
                 }else{
                     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
                     if($row['type'] != 'admin'){

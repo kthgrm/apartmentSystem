@@ -1,61 +1,5 @@
 <?php include('includes/header.php'); ?>
 
-<?php
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['generateInvoices'])) {
-        // Handle generating invoices for all units
-        $monthYear = date('F Y', strtotime($_POST['month']));
-        $issueDate = $_POST['issueDate'];
-        $dueDate = $_POST['dueDate'];
-
-        $query = "SELECT * FROM unit WHERE status = 'occupied'";
-        $result = mysqli_query($conn, $query);
-
-        if (mysqli_num_rows($result) > 0) {
-            while ($unit = mysqli_fetch_assoc($result)) {
-                $unitID = $unit['unitID'];
-                $rent = $unit['unitRate'];
-                $paymentStatus = 'unpaid';
-
-                $insertQuery = "INSERT INTO invoice (unitID, monthYear, rentAmount, issueDate, dueDate, paymentStatus) VALUES ('$unitID', '$monthYear', '$rent', '$issueDate', '$dueDate', '$paymentStatus')";
-                if (mysqli_query($conn, $insertQuery)) {
-                    echo "<div class='alert alert-success'>Invoice generated successfully for Unit ID: $unitID</div>";
-                } else {
-                    echo "<div class='alert alert-danger'>Error generating invoice for Unit ID: $unitID - " . mysqli_error($conn) . "</div>";
-                }
-            }
-        } else {
-            echo "<div class='alert alert-danger'>No occupied units found</div>";
-        }
-    } elseif (isset($_POST['generateInvoiceByUnit'])) {
-        // Handle generating an invoice for a specific unit
-        $unitID = $_POST['unitID'];
-        $month = date('F Y', strtotime($_POST['month']));
-        $issueDate = $_POST['issueDate'];
-        $dueDate = $_POST['dueDate'];
-        $paymentStatus = 'unpaid';
-
-        // Fetch the unit rate
-        $unitQuery = "SELECT unitRate FROM unit WHERE unitID = '$unitID'";
-        $unitResult = mysqli_query($conn, $unitQuery);
-        if (mysqli_num_rows($unitResult) > 0) {
-            $unit = mysqli_fetch_assoc($unitResult);
-            $rentAmount = $unit['unitRate'];
-
-            // Insert the new invoice
-            $insertQuery = "INSERT INTO invoice (unitID, monthYear, rentAmount, issueDate, dueDate, paymentStatus) VALUES ('$unitID', '$month', '$rentAmount', '$issueDate', '$dueDate', '$paymentStatus')";
-            if (mysqli_query($conn, $insertQuery)) {
-                echo "<div class='alert alert-success'>Invoice generated successfully for Unit ID: $unitID</div>";
-            } else {
-                echo "<div class='alert alert-danger'>Error generating invoice: " . mysqli_error($conn) . "</div>";
-            }
-        } else {
-            echo "<div class='alert alert-danger'>Unit ID not found</div>";
-        }
-    }
-}
-?>
-
 <div class="row">
     <div class="col-md-12">
         <div class="card">
@@ -122,6 +66,61 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                     <div class="col"></div>
                 </div>
+                <?php
+                if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+                    if (isset($_POST['generateInvoices'])) {
+                        // Handle generating invoices for all units
+                        $monthYear = date('F Y', strtotime($_POST['month']));
+                        $issueDate = $_POST['issueDate'];
+                        $dueDate = $_POST['dueDate'];
+
+                        $query = "SELECT * FROM unit WHERE status = 'occupied'";
+                        $result = mysqli_query($conn, $query);
+
+                        if (mysqli_num_rows($result) > 0) {
+                            while ($unit = mysqli_fetch_assoc($result)) {
+                                $unitID = $unit['unitID'];
+                                $rent = $unit['unitRate'];
+                                $paymentStatus = 'unpaid';
+
+                                $insertQuery = "INSERT INTO invoice (unitID, monthYear, rentAmount, issueDate, dueDate, paymentStatus) VALUES ('$unitID', '$monthYear', '$rent', '$issueDate', '$dueDate', '$paymentStatus')";
+                                if (mysqli_query($conn, $insertQuery)) {
+                                    echo "<div class='alert alert-success'>Invoice generated successfully for Unit ID: $unitID</div>";
+                                } else {
+                                    echo "<div class='alert alert-danger'>Error generating invoice for Unit ID: $unitID - " . mysqli_error($conn) . "</div>";
+                                }
+                            }
+                        } else {
+                            echo "<div class='alert alert-danger'>No occupied units found</div>";
+                        }
+                    } elseif (isset($_POST['generateInvoiceByUnit'])) {
+                        // Handle generating an invoice for a specific unit
+                        $unitID = $_POST['unitID'];
+                        $month = date('F Y', strtotime($_POST['month']));
+                        $issueDate = $_POST['issueDate'];
+                        $dueDate = $_POST['dueDate'];
+                        $paymentStatus = 'unpaid';
+
+                        // Fetch the unit rate
+                        $unitQuery = "SELECT unitRate FROM unit WHERE unitID = '$unitID'";
+                        $unitResult = mysqli_query($conn, $unitQuery);
+                        if (mysqli_num_rows($unitResult) > 0) {
+                            $unit = mysqli_fetch_assoc($unitResult);
+                            $rentAmount = $unit['unitRate'];
+
+                            // Insert the new invoice
+                            $insertQuery = "INSERT INTO invoice (unitID, monthYear, rentAmount, issueDate, dueDate, paymentStatus) VALUES ('$unitID', '$month', '$rentAmount', '$issueDate', '$dueDate', '$paymentStatus')";
+                            if (mysqli_query($conn, $insertQuery)) {
+                                echo "<div class='alert alert-success'>Invoice generated successfully for Unit ID: $unitID</div>";
+                            } else {
+                                echo "<div class='alert alert-danger'>Error generating invoice: " . mysqli_error($conn) . "</div>";
+                            }
+                        } else {
+                            echo "<div class='alert alert-danger'>Unit ID not found</div>";
+                        }
+                    }
+                }
+                ?>
             </div>
         </div>
     </div>
